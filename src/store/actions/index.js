@@ -13,7 +13,7 @@ export default {
         const picData = data.data.data
         const picArr = []
         for (let i = 0; i < picData.length; i++) {
-          picArr.push({ img: picData[i].picUrl })
+          picArr.push({ pid: picData[i].id, img: picData[i].picUrl, path: picData[i].picPath })
         }
         commit('SWIPER_PIC_DATA', picArr)
       }

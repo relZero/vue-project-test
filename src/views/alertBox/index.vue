@@ -3,12 +3,11 @@
 </template>
 
 <script>
-  export default {
-    methods: {
-      handleOnClick() {
-        this.$layer.alert("找不到对象！")
-      }
+export default {
+  methods: {
+    handleOnClick() {
+      this.$layer.alert('找不到对象！')
     }
   }
+}
 </script>
- 

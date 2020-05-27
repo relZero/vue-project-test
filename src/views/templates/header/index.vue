@@ -2,10 +2,12 @@
   <div class="header">
     <h2>{{ headerTitle }}</h2>
     <a
+      v-if="isBack"
       href="javascript:;"
       class="header-icon l-icon back-icon"
       @click="goBack()"
     ></a>
+    <slot></slot>
   </div>
 </template>
 
@@ -16,6 +18,10 @@ export default {
     headerTitle: {
       type: String,
       default: '标题'
+    },
+    isBack: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <div id="tab">
+  <div class="tabs">
     <ul>
       <li
         v-for="(item, index) in tabs"
@@ -7,7 +7,8 @@
         :class="{ active: active == index }"
         :key="index"
       >
-        {{ item.type }}
+        <span v-if="!isCustomize">{{ item.type }}</span>
+        <slot v-else name="customizeTab"></slot>
       </li>
     </ul>
     <slot></slot>
@@ -23,6 +24,10 @@ export default {
       default: function() {
         return []
       }
+    },
+    isCustomize: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -44,40 +49,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#tab {
-  font: {
-    family: 'Avenir', Helvetica, Arial, sans-serif;
-  }
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* text-align: center;
-  color: #2c3e50;
-  margin-top: 60px; */
+.tabs {
   ul {
-    width: 200px;
     display: flex;
-  }
-  ul li {
-    width: 100px;
-    height: 40px;
-    background: {
-      color: #ccc;
-    }
-    display: inline-flex;
-    border: {
-      right: {
-        color: #ddd;
-        width: 1px;
-        style: solid;
+    li {
+      flex: 1;
+      height: 40px;
+      line-height: 40px;
+      text: {
+        align: center;
       }
-    }
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  ul li.active {
-    background: {
-      color: #333;
+      background: {
+        color: #ccc;
+      }
+      cursor: pointer;
+      &.active {
+        background: {
+          color: #333;
+        }
+        color: #fff;
+      }
     }
   }
 }

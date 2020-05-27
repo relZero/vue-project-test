@@ -9,15 +9,15 @@
 </template>
 
 <script>
-  import verificationCode from '../../vue-scaffold-npm/components/verificationCode/index.vue'
-  export default {
-    components: {
-      verificationCode
-    },
-    methods: {
-      handleClickCount() {
-        this.$refs.verificationCode.countDownInit();
-      }
+import verificationCode from '../../vue-scaffold-npm/components/verificationCode/index.vue'
+export default {
+  components: {
+    verificationCode
+  },
+  methods: {
+    handleClickCount() {
+      this.$refs.verificationCode.countDownInit()
     }
   }
+}
 </script>

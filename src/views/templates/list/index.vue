@@ -5,11 +5,11 @@
         <div class="list-pic">
           <img :src="item.picUrl" /><slot name="picTag" :itemData="item"></slot>
         </div>
-        <div v-if="item.titleVal !== ''" class="list-title">
+        <div v-if="item.titleVal && item.titleVal !== '' " class="list-title">
           {{ item.titleVal }}<slot name="titleTag" :itemData="item"></slot>
         </div>
         <slot name="wordBefore" :itemData="item"></slot>
-        <div v-if="item.wordVal !== ''" class="list-word">
+        <div v-if="item.wordVal && item.wordVal !== ''" class="list-word">
           {{ item.wordVal }}
         </div>
         <slot name="wordAfter" :itemData="item"></slot>

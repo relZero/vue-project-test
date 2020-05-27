@@ -41,7 +41,7 @@ export default {
     Tabs,
     tab1,
     tab2,
-    tab3 
+    tab3
   }
 }
 </script>

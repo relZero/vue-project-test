@@ -2,7 +2,9 @@
   <div class="scroll">
     <swiper :options="swiperOption" class="swiper-wrap" ref="mySwiper" v-if="swiperPics.length!=0">
       <swiper-slide v-for="(item, index) in swiperPics" :key="index">
-        <img :src="item.img" alt />
+        <router-link :to="`${item.path}?id=${item.pid}`">
+          <img :src="item.img" alt />
+        </router-link>
       </swiper-slide>
       <!-- 常见的小圆点 -->
       <div class="swiper-pagination" slot="pagination"></div>

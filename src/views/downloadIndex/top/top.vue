@@ -6,7 +6,7 @@
         <span>搜索游戏</span>
       </router-link>
     </div>
-    <router-link class="header-icon r-icon people-icon" to="/login"></router-link>
+    <router-link class="header-icon r-icon people-icon" to="/userCenter"></router-link>
   </div>
 </template>
 

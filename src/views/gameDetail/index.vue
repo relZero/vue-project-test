@@ -6,23 +6,25 @@
         <router-link class="user" to="/userCenter"></router-link>
       </div>
     </app-header>
-    <img src="http://placehold.it/750x320/ccc/fff">
+    <img :src="gameDetailData.headerPic">
     <List
       class="game-info"
       list-type="row"
       :is-link="false"
       :list-data="gameInfoData"
     >
-      <div class="game-num" slot="wordBefore">
-        <span class="type">角色</span>
-        <span class="size">755MB</span>
+      <div class="game-num" slot="wordBefore" slot-scope="{ itemData }">
+        <span class="type">{{ itemData.typeVal }}</span>
+        <span class="size">{{ `${itemData.sizeVal}MB` }}</span>
       </div>
+      <button slot="listBtn" class="list-btn">立即下载</button>
     </List>
-    <GameContent />
+    <GameContent :content-data="gameDetailData" />
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import AppHeader from '@/views/templates/header'
 import List from '@/views/templates/list'
 import GameContent from './gameContent'
@@ -33,21 +35,28 @@ export default {
     List,
     GameContent
   },
-  data () {
-    return {
-      gameInfoData: [
+  computed: {
+    ...mapState(['gameDetailState']),
+    gameDetailData() {
+      return this.gameDetailState
+    },
+    gameInfoData() {
+      return [
         {
-          picUrl: 'http://placehold.it/100x100/ccc/fff',
-          titleVal: '西游女儿国',
-          wordVal: '游戏讲述了被封印在神魔之井的魔族，企图破除封印，为...'
+          picUrl: this.gameDetailState.gameIcon,
+          titleVal: this.gameDetailState.gameTitle,
+          wordVal: this.gameDetailState.gameWord,
+          typeVal: this.gameDetailState.gameType,
+          sizeVal: this.gameDetailState.gameSize
         }
       ]
     }
   },
   mounted() {
-    console.dir(Object)
-    const routePathId = this.$route.query.id
-    console.log(routePathId)
+    this.gameDetailAxios()
+  },
+  methods: {
+    ...mapActions(['gameDetailAxios'])
   }
 }
 </script>
@@ -55,6 +64,35 @@ export default {
 <style lang="scss" scoped>
 @import './src/assets/styles/variable.scss';
 .game-detail {
+  min-height: 100%;
+  background: {
+    color: #fff;
+  };
+  .list-btn {
+    position: absolute;
+    right: 0;
+    top: 30rem / $remCalculation;
+    display: block;
+    width: 112rem / $remCalculation;
+    height: 54rem / $remCalculation;
+    line-height: 54rem / $remCalculation;
+    text: {
+      align: center;
+    }
+    font: {
+      size: 24rem / $remCalculation;
+    }
+    color: #fff;
+    background: {
+      image: linear-gradient(to right, #43caff, #05b3fe);
+    }
+    background: {
+      image: -webkit-linear-gradient(to right, #43caff, #05b3fe);
+    }
+    border: {
+      radius: 28rem / $remCalculation;
+    }
+  }
   .right-action {
     position: absolute;
     right: 30rem / $remCalculation;
@@ -89,8 +127,12 @@ export default {
   }
   .game-info {
     background: #fff;
-    margin: {
-      bottom: 20rem / $remCalculation;
+    border: {
+      bottom: {
+        width: 20rem / $remCalculation;
+        color: #f6f6f6;
+        style: solid;
+      }
     }
     padding: 0 20rem / $remCalculation;
     .game-num {

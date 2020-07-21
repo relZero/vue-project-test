@@ -2,10 +2,10 @@
   <div class="game-content">
     <Tabs
       class="game-tabs"
-      :tabItems="tabsData"
+      :tab-items="tabsData"
       @clickToggle="tabToggle"
     >
-      <component :is="currentView"></component>
+      <component :is="currentView" :current-data="currentData"></component>
     </Tabs>
   </div>
 </template>
@@ -18,6 +18,12 @@ import ServerTab from './serverTab'
 import NewsTab from './newsTab'
 
 export default {
+  props: {
+    contentData: {
+      type: Object,
+      default: {}
+    }
+  },
   components: {
     Tabs,
     DetailTab,
@@ -28,29 +34,43 @@ export default {
   data () {
     return {
       currentView: 'DetailTab',
-      tabsData: [
-        {
-          type: '详情',
-          view: 'DetailTab'
-        },
-        {
-          type: '礼包',
-          view: 'GiftTab'
-        },
-        {
-          type: '开服',
-          view: 'ServerTab'
-        },
-        {
-          type: '资讯',
-          view: 'NewsTab'
-        }
-      ]
+      currentData: this.contentData,
+      tabsData: []
+    }
+  },
+  watch: {
+    contentData: {
+      handler (newValue, oldValue) {
+        this.currentData = newValue.gameDetailInfo
+        this.tabsData = [
+          {
+            type: '详情',
+            view: 'DetailTab',
+            data: newValue.gameDetailInfo
+          },
+          {
+            type: '礼包',
+            view: 'GiftTab',
+            data: newValue.gameGiftInfo
+          },
+          {
+            type: '开服',
+            view: 'ServerTab',
+            data: newValue.gameServerInfo
+          },
+          {
+            type: '资讯',
+            view: 'NewsTab',
+            data: newValue.gameNewsInfo
+          }
+        ]
+      }
     }
   },
   methods: {
     tabToggle (activeData) {
-      this.currentView = activeData.currentView
+      this.currentView = activeData.tabView
+      this.currentData = activeData.tabData
     }
   }
 }
@@ -60,17 +80,17 @@ export default {
 @import './src/assets/styles/variable.scss';
 .game-content {
   .game-tabs {
-    border: {
-      bottom: {
-        color: #efefef;
-        width: 1px;
-        style: solid;
-      }
-    }
     background: {
       color: #fff;
     }
-    ul {
+    .tabs-box {
+      border: {
+        bottom: {
+          color: #efefef;
+          width: 1px;
+          style: solid;
+        }
+      }
       li {
         height: 80rem / $remCalculation;
         line-height: 80rem / $remCalculation;

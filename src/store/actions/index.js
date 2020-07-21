@@ -1,4 +1,6 @@
 import axiosUtils from '@/utils/axiosInit'
+import dateFormat from '@/utils/dateFormat'
+import forData from '@/utils/forData'
 
 const axiosUrl = 'http://localhost:3000'
 
@@ -60,7 +62,7 @@ export default {
       }
     )
   },
-  searchTypeData({ commit }, typeOption) {
+  searchTypeAxios({ commit }, typeOption) {
     axiosUtils.axiosInit(
       {
         axiosUrl: axiosUrl,
@@ -82,7 +84,7 @@ export default {
       }
     )
   },
-  searchLikeData({ commit }) {
+  searchLikeAxios({ commit }) {
     axiosUtils.axiosInit(
       {
         axiosUrl: axiosUrl,
@@ -91,6 +93,52 @@ export default {
       data => {
         const likeArr = data.data.data
         commit('SEARCH_LIKE_DATA', likeArr)
+      }
+    )
+  },
+  gameDetailAxios({ commit }) {
+    axiosUtils.axiosInit(
+      {
+        axiosUrl: axiosUrl,
+        axiosPath: '/gameDetail'
+      },
+      data => {
+        const detailData = data.data.data
+        const detailScroll = []
+        const detailGameList = []
+        const detailGift = []
+        const serverArr = []
+        forData.forDataAction(detailData.gameDetailInfo.scrollPic, function(data) {
+          detailScroll.push({
+            pid: data.id,
+            img: data.picUrl,
+            path: data.picPath
+          })
+        })
+        forData.forDataAction(detailData.gameDetailInfo.playerGameList, function(data) {
+          detailGameList.push({
+            pid: data.id,
+            picUrl: data.gameIcon,
+            titleVal: data.gameTitle
+          })
+        })
+        forData.forDataAction(detailData.gameGiftInfo, function(data) {
+          detailGift.push({
+            pid: data.id,
+            titleVal: data.giftName,
+            wordVal: data.giftWord,
+            giftPercentage: data.giftPercentage
+          })
+        })
+        forData.forDataAction(detailData.gameServerInfo, function(data) {
+          data.serverDate = dateFormat.dateFormatAction(data.serverDate, 'MM/DD hh:mm')
+          serverArr.push(data)
+        })
+        detailData.gameDetailInfo.scrollPic = detailScroll
+        detailData.gameDetailInfo.playerGameList = detailGameList
+        detailData.gameGiftInfo = detailGift
+        detailData.gameServerInfo = serverArr
+        commit('GAME_DETAIL_DATA', detailData)
       }
     )
   }

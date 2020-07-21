@@ -62,21 +62,21 @@ export default {
     }
   },
   mounted() {
-    this.searchTypeData({
+    this.searchTypeAxios({
       searchTypeClass: '类型',
       searchTypeMutation: 'FIR_SEARCH_TYPE'
     })
-    this.searchTypeData({
+    this.searchTypeAxios({
       searchTypeClass: '题材',
       searchTypeMutation: 'SED_SEARCH_TYPE'
     })
-    this.searchTypeData({
+    this.searchTypeAxios({
       searchTypeClass: '玩法',
       searchTypeMutation: 'THI_SEARCH_TYPE'
     })
   },
   methods: {
-    ...mapActions(['searchTypeData']),
+    ...mapActions(['searchTypeAxios']),
     typeClick(data, typeDataName) {
       this.typeDataCom[typeDataName][data.dataIndex].isClick = !this.typeDataCom[typeDataName][
         data.dataIndex

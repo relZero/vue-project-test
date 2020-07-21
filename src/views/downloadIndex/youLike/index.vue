@@ -27,8 +27,8 @@
       <div class="game-info" slot="wordBefore" slot-scope="{ itemData }">
         {{ itemData.gameType }}&nbsp;&nbsp;·&nbsp;&nbsp;{{ itemData.gameSize }}
       </div>
-      <div class="list-btn" slot="wordAfter">
-        <router-link slot="wordAfter" to="/">专区</router-link>
+      <div class="list-btn" slot="listBtn">
+        <router-link to="/">专区</router-link>
       </div>
     </List>
   </div>

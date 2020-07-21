@@ -7,5 +7,6 @@ export default {
   firTypeState: [],
   sedTypeState: [],
   thiTypeState: [],
-  searchLikeState: []
+  searchLikeState: [],
+  gameDetailState: {}
 }

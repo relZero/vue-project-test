@@ -1,8 +1,8 @@
 <template>
   <div class="list">
     <ul>
-      <li v-for="(item, index) in listData" :key="index" :class="listType">
-        <div class="list-pic">
+      <li v-for="(item, index) in listData" :key="index" :class="isPic ? listType : `${ listType } no-pic`">
+        <div v-if="isPic" class="list-pic">
           <img :src="item.picUrl" /><slot name="picTag" :itemData="item"></slot>
         </div>
         <div v-if="item.titleVal && item.titleVal !== '' " class="list-title">
@@ -13,7 +13,8 @@
           {{ item.wordVal }}
         </div>
         <slot name="wordAfter" :itemData="item"></slot>
-        <router-link v-if="isLink" :to="item.btnPath" class="list-link"></router-link>
+        <slot name="listBtn" :itemData="item"></slot>
+        <router-link v-if="isLink" :to="item.btnPath ? item.btnPath : '/'" class="list-link"></router-link>
       </li>
     </ul>
   </div>
@@ -26,6 +27,10 @@ export default {
     listType: {
       type: String,
       default: 'column'
+    },
+    isPic: {
+      type: Boolean,
+      default: true
     },
     isLink: {
       type: Boolean,
@@ -102,6 +107,11 @@ export default {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+        }
+      }
+      &.no-pic {
+        padding: {
+          left: 0;
         }
       }
       .list-link {

@@ -5,22 +5,30 @@ export default [
   },
   {
     path: '/home',
-    component: () => import('../views/downloadIndex/index.vue')
+    component: () => import('../views/downloadIndex')
   },
   {
     path: '/search',
-    component: () => import('../views/search/index.vue')
+    component: () => import('../views/search')
   },
   {
     path: '/login',
-    component: () => import('../views/login/index.vue')
+    component: () => import('../views/login')
   },
   {
     path: '/userCenter',
-    component: () => import('../views/userCenter/index.vue')
+    component: () => import('../views/userCenter')
   },
   {
     path: '/gameDetail',
-    component: () => import('../views/gameDetail/index.vue')
+    component: () => import('../views/gameDetail')
+  },
+  {
+    path: '/articleDetail',
+    component: () => import('../views/articleDetail')
+  },
+  {
+    path: '/hotList',
+    component: () => import('../views/hotList')
   }
 ]

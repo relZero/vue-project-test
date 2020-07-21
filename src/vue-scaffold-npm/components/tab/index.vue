@@ -1,9 +1,9 @@
 <template>
   <div class="tabs">
-    <ul>
+    <ul class="tabs-box">
       <li
         v-for="(item, index) in tabs"
-        @click="toggle(index, item.view)"
+        @click="toggle(index, item)"
         :class="{ active: active == index }"
         :key="index"
       >
@@ -36,10 +36,18 @@ export default {
       tabs: this.tabItems
     }
   },
+  watch: {
+    tabItems: {
+      handler (newValue, oldValue) {
+        this.tabs = newValue
+      }
+    }
+  },
   methods: {
     toggle(index, val) {
       const activeData = {
-        currentView: val
+        tabView: val.view,
+        tabData: val.data
       }
       this.active = index
       this.$emit('clickToggle', activeData)
@@ -50,7 +58,7 @@ export default {
 
 <style lang="scss" scoped>
 .tabs {
-  ul {
+  .tabs-box {
     display: flex;
     li {
       flex: 1;

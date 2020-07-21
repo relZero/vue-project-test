@@ -25,5 +25,8 @@ export default {
   },
   SEARCH_LIKE_DATA(state, data) {
     state.searchLikeState = data
+  },
+  GAME_DETAIL_DATA(state, data) {
+    state.gameDetailState = data
   }
 }

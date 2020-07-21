@@ -41,10 +41,10 @@ export default {
   mounted() {
     const getHistoryCookie = this.$cookie.get('historyArr')
     this.historyData = getHistoryCookie ? getHistoryCookie.split(',') : []
-    this.searchLikeData()
+    this.searchLikeAxios()
   },
   methods: {
-    ...mapActions(['searchLikeData']),
+    ...mapActions(['searchLikeAxios']),
     handleHistoryDelete(index) {
       this.historyData.splice(index, 1)
       if (this.historyData.length > 0) {

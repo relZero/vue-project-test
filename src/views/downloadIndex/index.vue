@@ -7,10 +7,10 @@
       class="ios-rule"
       rule-word="游戏下载或安装失败、闪退，怎么办？"
       :rule-left="15"
-      :rule-right="15"
+      :rule-right="30"
     >
       <span slot="ruleIcon" class="icon"></span>
-      <router-link to="/" slot="ruleControl" class="link">戳这里</router-link>
+      <router-link :to="{ path: '/articleDetail', query: { articleTitle:'游戏下载或安装失败、闪退，怎么办？' }}" slot="ruleControl" class="link">戳这里</router-link>
     </rule-bar>
     <Nav class="index-nav m-b10" :nav-data="navDataArr">
       <img slot-scope="{ items }" :src="items.navPic" />
@@ -29,14 +29,14 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 
-import Top from './top/top.vue'
-import Scroll from '@/vue-scaffold-npm/components/scroll/index.vue'
-import Nav from '@/vue-scaffold-npm/components/nav/index.vue'
-import HotGame from './hotGame/hotGame.vue'
-import NewGame from './newGame/newGame.vue'
-import YouLike from './youLike/youLike.vue'
-import RuleBar from '@/components/ruleBar/index.vue'
-import Footer from '../templates/footer/index.vue'
+import Top from './top'
+import Scroll from '@/vue-scaffold-npm/components/scroll'
+import Nav from '@/vue-scaffold-npm/components/nav'
+import HotGame from './hotGame'
+import NewGame from './newGame'
+import YouLike from './youLike'
+import RuleBar from '@/components/ruleBar'
+import Footer from '../templates/footer'
 
 import equipmentJudgment from '@/utils/equipmentJudgmentInit.js'
 

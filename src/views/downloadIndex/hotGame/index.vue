@@ -9,7 +9,7 @@
       <i slot="titleIcon" class="title-border"></i>
       <router-link to="/" slot="titleControl" class="more">更多></router-link>
     </Title>
-    <List class="hot-game-list" :list-data="hotListData" :isLink="true">
+    <List class="hot-game-list" :list-data="hotListData.slice(0, 8)" :isLink="true">
       <i
         v-if="itemData.isPlayer"
         class="player"
